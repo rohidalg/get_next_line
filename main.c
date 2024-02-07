@@ -2,11 +2,10 @@
 
 int	main(void)
 {
-	int fd;
+	int		fd;
+	char	*manolo;
 
 	fd = open("ejemplo.txt", O_RDONLY);
-
-	char *manolo;
 	manolo = get_next_line(fd);
 	printf("%s", manolo);
 	manolo = get_next_line(fd);

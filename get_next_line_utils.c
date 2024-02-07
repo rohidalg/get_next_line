@@ -6,7 +6,7 @@
 /*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:21:06 by rohidalg          #+#    #+#             */
-/*   Updated: 2024/01/26 12:47:27 by rohidalg         ###   ########.fr       */
+/*   Updated: 2024/02/07 19:10:29 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,107 +36,74 @@ char	*ft_strchr(const char *s, int c)
 
 /*se utiliza para buscar la primera aparición de un carácter específico*/
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t n)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	size_t	i;
-	size_t	src2;
-
-	src2 = ft_strlen(src);
-	i = 0;
-	if (!dst)
-    	return (0);
-	if (n == 0)
-		return (src2);
-	while ((n - 1) > i && src[i])
-	{
-		dst[i] = src[i];
-		i++;
-	}
-	dst[i] = '\0';
-	return (src2);
-}
-
-size_t	ft_strlcat(char *dst, const char *src, size_t size)
-{
+	char	*dest;
 	size_t	i;
 	size_t	j;
 
 	i = 0;
 	j = 0;
-	if (size == 0)
-    	return (i + ft_strlen(src));
-	while (dst[i] && i < size)
-		i++;
-	while (src[j] && i + j + 1 < size)
-	{
-		dst[i + j] = src[j];
-		j++;
-	}
-	if (i != size)
-		dst[i + j] = '\0';
-	return (i + ft_strlen(src));
-}
-
-char	*ft_strjoin(char const *s1, char const *s2)
-{
-	char	*dest;
-	size_t		i;
-	size_t		j;
-	
-	i = 0;
-	j = 0;
 	dest = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!dest)
-		return (NULL);
-	ft_strlcpy(dest, s1, ft_strlen(s1) + ft_strlen(s2) + 1);
-	ft_strlcat(dest, s2, ft_strlen(s1) + ft_strlen(s2) + 1);
+		return (0);
+	while (s1 && s1[i])
+	{
+		dest[i] = s1[i];
+		i++;
+	}
+	while (s2 && s2[j])
+	{
+		dest[i] = s2[j];
+		j++;
+		i++;
+	}
+	dest[i] = '\0';
 	return (dest);
 }
 // Reserva (con malloc(3)) y devuelve una nueva string,
 // formada por la concatenación de ’s1’ y ’s2’.
 
-char	*ft_substr_gnl(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char	*sub;
-	size_t	lens;
+	char	*dest;
+	size_t	s_len;
 	size_t	i;
 
 	i = 0;
-	if (s == NULL)
-		return (NULL);
-	lens = ft_strlen(s);
-	if (len > lens - start)
-		len = lens - start;
-	if (start >= lens)
-		return (ft_strdup_gnl(""));
-	sub = malloc(sizeof(char) * (lens + 1));
-	if (sub == NULL)
-		return (NULL);
+	if (!s)
+		return (0);
+	s_len = ft_strlen(s);
+	if (start >= s_len)
+		return (ft_strdup(""));
+	if (len > s_len - start)
+		len = s_len - start;
+	dest = (char *)malloc(len + 1);
+	if (!dest)
+		return (0);
 	while (i < len)
 	{
-		sub[i] = s[start + i];
+		dest[i] = s[start + i];
 		i++;
 	}
-	sub[i] = '\0';
-	return (sub);
+	dest[i] = '\0';
+	return (dest);
 }
 // Reserva (con malloc(3)) y devuelve una substring de la string ’s’.
-// La substring empieza desde el índice ’start’ y tiene una longitud máxima ’len’.
+// La substr empieza desde el índice ’start’ y tiene una longitud máxima ’len’.
 
-char	*ft_strdup_gnl(const char *s1)
+char	*ft_strdup(const char *s)
 {
 	char	*dup;
-	size_t	i;
-	size_t	slengh;
+	int		i;
 
+	dup = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1));
 	i = 0;
-	slengh = ft_strlen(s1);
-	dup = malloc(sizeof(char) * slengh + 1);
-	if (dup == NULL)
-		return (NULL);
-	while (s1 && s1[i])
+	if (!dup)
+		return (0);
+	while (s[i])
 	{
-		dup[i] = s1[i];
+		dup[i] = s[i];
 		i++;
 	}
 	dup[i] = '\0';
@@ -144,4 +111,5 @@ char	*ft_strdup_gnl(const char *s1)
 }
 // La función asigna suficiente memoria para una copia de la cadena s1,
 // realiza la copia y devuelve un puntero a ella.
-//útil en situaciones donde necesitas trabajar con una copia independiente de la cadena  original.
+//útil en situaciones donde necesitas trabajar con una copia independiente
+// de la cadena  original.
