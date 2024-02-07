@@ -6,7 +6,7 @@
 /*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:21:06 by rohidalg          #+#    #+#             */
-/*   Updated: 2024/01/25 19:52:21 by rohidalg         ###   ########.fr       */
+/*   Updated: 2024/01/26 12:47:27 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,16 +82,14 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	char	*dest;
 	size_t		i;
 	size_t		j;
-
-	if (!s1 || !s2)
-		return (NULL);
-	i = ft_strlen(s1);
-	j = ft_strlen(s2);
-	dest = (char *)malloc(i + j + 1);
+	
+	i = 0;
+	j = 0;
+	dest = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!dest)
-		return (0);
-	ft_strlcpy(dest, s1, i + j + 1);
-	ft_strlcat(dest, s2, i + j + 1);
+		return (NULL);
+	ft_strlcpy(dest, s1, ft_strlen(s1) + ft_strlen(s2) + 1);
+	ft_strlcat(dest, s2, ft_strlen(s1) + ft_strlen(s2) + 1);
 	return (dest);
 }
 // Reserva (con malloc(3)) y devuelve una nueva string,
