@@ -3,27 +3,20 @@
 int	main(void)
 {
 	int		fd;
-	char	*manolo;
+	char	*str;
+	int 	line;
 
+	line = 1;
 	fd = open("ejemplo.txt", O_RDONLY);
-	manolo = get_next_line(fd);
-	printf("%s", manolo);
-	manolo = get_next_line(fd);
-	printf("%s", manolo);
-	// manolo = get_next_line(fd);
-	// printf("%s", manolo);
-	// manolo = get_next_line(fd);
-	// printf("%s", manolo);
-	manolo = get_next_line(fd);
-	printf("%s", manolo);
-	manolo = get_next_line(fd);
-	printf("%s", manolo);
-	manolo = get_next_line(fd);
-	printf("%s", manolo);
-	manolo = get_next_line(fd);
-	printf("%s", manolo);
-	manolo = get_next_line(fd);
-	printf("%s", manolo);
+	while (line <= 10)
+	{
+		str = get_next_line(fd);
+		if (!str)
+			break;
+		printf("%s", str);
+		line++;
+		free(str);
+	}
 	system("leaks -q a.out");
 	close(fd);
 	return (0);

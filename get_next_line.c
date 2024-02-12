@@ -6,7 +6,7 @@
 /*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:20:46 by rohidalg          #+#    #+#             */
-/*   Updated: 2024/02/07 19:07:18 by rohidalg         ###   ########.fr       */
+/*   Updated: 2024/02/12 17:21:54 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ char	*ft_read_line(int fd, char *str)
 	free(new_line);
 	return (str);
 }
+// lee lineas de un archivo a traves del fd, las concatena a str.
 
 char	*ft_print(char **s)
 {
@@ -62,6 +63,7 @@ char	*ft_print(char **s)
 	}
 	return (substr);
 }
+//toma una subcadena,actualiza la cadena principal paraq ue comience despues de la subcadena
 
 char	*get_next_line(int fd)
 {
@@ -80,3 +82,4 @@ char	*get_next_line(int fd)
 	result = ft_print(&tmp);
 	return (result);
 }
+//almacena la linea leida en la estatica tmp,y devuelve la linea leida
